@@ -2,6 +2,10 @@ pipeline {
     agent any
 
     environment {
+        HTTP_PROXY  = 'http://restrictedproxy.connect.te.com:80'
+        HTTPS_PROXY = 'http://restrictedproxy.connect.te.com:80'
+        http_proxy  = 'http://restrictedproxy.connect.te.com:80'
+        https_proxy = 'http://restrictedproxy.connect.te.com:80'
         OUTPUT_DIR = "C:\\data"
     }
 
@@ -11,6 +15,7 @@ pipeline {
 stage('Python Check') {
     steps {
         bat '''
+        echo HTTP_PROXY=%HTTP_PROXY%
         python -m pip install requests pandas openpyxl --proxy http://restrictedproxy.connect.te.com:80
         where python
         python -m pip list
