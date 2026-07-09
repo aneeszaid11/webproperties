@@ -6,6 +6,21 @@ pipeline {
     }
 
     stages {
+
+        
+stage('Python Check') {
+    steps {
+        bat '''
+        where python
+        python -m pip list
+        whoami
+        python --version
+        python -c "import requests; print(requests.__version__)"
+        python -c "import pandas; print(pandas.__version__)"
+        '''
+    }
+}
+
         stage('Run Script') {
             steps {
                 bat '''
