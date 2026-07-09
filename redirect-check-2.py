@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import urllib3
-from datetime import datetime  # ✅ NEW
+from datetime import datetime  #  NEW
  
 # Disable SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -17,7 +17,7 @@ headers = {
  
 results = []
  
-# ✅ Get today's date
+#  Get today's date
 today_date = datetime.now().strftime("%Y-%m-%d")
  
 with open(input_file, "r") as f:
@@ -48,7 +48,7 @@ for original_url in urls:
                 verify=False
             )
  
-        # ✅ Build redirect chain
+        #  Build redirect chain
         chain = []
         visited = set()
  
@@ -74,10 +74,10 @@ for original_url in urls:
  
         status = "PASS" if final_code == 200 else "FAIL"
  
-        # ✅ NEW: Status Color
+        #  NEW: Status Color
         status_color = "Green" if final_code == 200 else "Red"
  
-        # ✅ NEW: Review Comment
+        #  NEW: Review Comment
         review_comment = f"Reviewed on {today_date}: Link is redirected to {final_url}"
  
         results.append({
@@ -88,14 +88,14 @@ for original_url in urls:
             "Redirect Chain": chain_str,
             "Loop Detected": loop_flag,
             "Result": status,
-            "Status Color": status_color,          # ✅ NEW COLUMN
-            "Review Comment": review_comment       # ✅ NEW COLUMN
+            "Status Color": status_color,          # NEW COLUMN
+            "Review Comment": review_comment       # NEW COLUMN
         })
  
         print(f"{original_url} -> {final_url} [{final_code}]")
  
     except Exception as e:
-        # ✅ even for errors, add new columns
+        # even for errors, add new columns
         results.append({
             "Source URL": original_url,
             "Final URL": "ERROR",
@@ -110,8 +110,8 @@ for original_url in urls:
  
         print(f"{original_url} -> ERROR: {e}")
  
-# ✅ Export to Excel
+# Export to Excel
 df = pd.DataFrame(results)
 df.to_excel(output_file, index=False, engine="openpyxl")
  
-print(f"\n✅ Report saved to {output_file}")
+print(f"\n Report saved to {output_file}")
