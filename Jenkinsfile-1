@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    environment {
+        OUTPUT_DIR = "C:\\data"
+    }
+
+    stages {
+        stage('Run Script') {
+            steps {
+                bat '''
+                    python redirect-check-2.py
+
+                    if exist redirect_results*.xlsx (
+                        move redirect_results*.xlsx %OUTPUT_DIR%
+                    ) else (
+                        echo No XLSX file found
+                    )
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Job completed"
+        }
+        failure {
+            echo "❌ Job failed"
+        }
+    }
+}
