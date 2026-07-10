@@ -17,4 +17,3 @@ print(r.url)
 
 for h in r.history:
     print(h.status_code, h.url)
-`
