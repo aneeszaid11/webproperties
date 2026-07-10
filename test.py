@@ -23,4 +23,4 @@ for k, v in r.headers.items():
     print(f"{k}: {v}")
 
 print("\nBODY:")
-print(r.text[:1000])
+print(r.text[:6000])
