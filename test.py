@@ -1,24 +1,20 @@
-import os
-
 import requests
 
-print("HTTP_PROXY =", os.environ.get("HTTP_PROXY"))
-print("HTTPS_PROXY =", os.environ.get("HTTPS_PROXY"))
+proxies = {
+    "http": "http://restrictedproxy.connect.te.com:80",
+    "https": "http://restrictedproxy.connect.te.com:80"
+}
 
-try:
-    r = requests.get(
-        "https://tycoident.com",
-        timeout=30,
-        allow_redirects=True
-    )
-    print(r.status_code)
-    print(r.url)
+r = requests.get(
+    "https://tycoident.com",
+    timeout=40,
+    allow_redirects=True,
+    verify=False,
+    proxies=proxies
+)
 
-except requests.exceptions.ProxyError as e:
-    print("PROXY ERROR:", e)
+print("Status:", r.status_code)
+print("Final URL:", r.url)
 
-except requests.exceptions.ConnectionError as e:
-    print("CONNECTION ERROR:", e)
-
-except Exception as e:
-    print("ERROR:", e)
+for h in r.history:
+    print(h.status_code, h.url)
