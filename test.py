@@ -12,8 +12,15 @@ r = requests.get(
     proxies=proxies
 )
 
-print(r.status_code)
-print(r.url)
+print("Status:", r.status_code)
+print("URL:", r.url)
 
-for h in r.history:
-    print(h.status_code, h.url)
+print("\nSERVER:")
+print(r.headers.get("Server"))
+
+print("\nHEADERS:")
+for k, v in r.headers.items():
+    print(f"{k}: {v}")
+
+print("\nBODY:")
+print(r.text[:1000])
