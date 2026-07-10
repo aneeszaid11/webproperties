@@ -2,7 +2,7 @@ import requests
 
 try:
     r = requests.get(
-        "https://nevalo.com",
+        "https://tycoident.com",
         timeout=30,
         allow_redirects=True
     )
