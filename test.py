@@ -6,15 +6,15 @@ proxies = {
 }
 
 r = requests.get(
-    "https://tycoident.com",
+    "http://tycoident.com",
     timeout=40,
     allow_redirects=True,
-    verify=False,
     proxies=proxies
 )
 
-print("Status:", r.status_code)
-print("Final URL:", r.url)
+print(r.status_code)
+print(r.url)
 
 for h in r.history:
     print(h.status_code, h.url)
+`
