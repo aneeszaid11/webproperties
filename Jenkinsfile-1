@@ -28,7 +28,7 @@ stage('Python Check') {
         stage('Run Script') {
             steps {
                 bat '''
-                    python redirect-check-2.py
+                    python test.py
 
                     if exist redirect_results*.xlsx (
                         move redirect_results*.xlsx %OUTPUT_DIR%
