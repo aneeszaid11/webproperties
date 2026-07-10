@@ -1,4 +1,9 @@
+import os
+
 import requests
+
+print("HTTP_PROXY =", os.environ.get("HTTP_PROXY"))
+print("HTTPS_PROXY =", os.environ.get("HTTPS_PROXY"))
 
 try:
     r = requests.get(
