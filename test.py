@@ -1,26 +1,16 @@
-import requests
+from playwright.sync_api import sync_playwright
 
-proxies = {
-    "http": "http://restrictedproxy.connect.te.com:80",
-    "https": "http://restrictedproxy.connect.te.com:80"
-}
+with sync_playwright() as p:
+    browser = p.chromium.launch(channel="msedge", headless=True)
 
-r = requests.get(
-    "http://tycoident.com",
-    timeout=40,
-    allow_redirects=True,
-    proxies=proxies
-)
+    page = browser.new_page()
 
-print("Status:", r.status_code)
-print("URL:", r.url)
+    response = page.goto(
+        "http://tycoident.com",
+        wait_until="networkidle"
+    )
 
-print("\nSERVER:")
-print(r.headers.get("Server"))
+    print("Status:", response.status)
+    print("Final URL:", page.url)
 
-print("\nHEADERS:")
-for k, v in r.headers.items():
-    print(f"{k}: {v}")
-
-print("\nBODY:")
-print(r.text[:6000])
+    browser.close()
