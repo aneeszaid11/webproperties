@@ -17,7 +17,7 @@ stage('Python Check') {
         bat '''
         echo HTTP_PROXY=%HTTP_PROXY%
         python -m pip install playwright requests pandas openpyxl --proxy http://restrictedproxy.connect.te.com:80
-        python -m playwright install chromium --proxy http://restrictedproxy.connect.te.com:80
+        python -m playwright install chromium
         where python
         python -m pip list
         whoami
