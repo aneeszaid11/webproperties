@@ -16,7 +16,7 @@ stage('Python Check') {
     steps {
         bat '''
         echo HTTP_PROXY=%HTTP_PROXY%
-        python -m pip install requests pandas openpyxl --proxy http://restrictedproxy.connect.te.com:80
+        python -m pip install sync_playwright requests pandas openpyxl --proxy http://restrictedproxy.connect.te.com:80
         where python
         python -m pip list
         whoami
