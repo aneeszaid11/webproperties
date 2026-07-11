@@ -15,6 +15,7 @@ pipeline {
 stage('Python Check') {
     steps {
         bat '''
+        where msedge
         echo HTTP_PROXY=%HTTP_PROXY%
         python -m pip install sync_playwright requests pandas openpyxl --proxy http://restrictedproxy.connect.te.com:80
         where python
