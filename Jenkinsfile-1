@@ -29,7 +29,7 @@ stage('Python Check') {
         stage('Run Script') {
             steps {
                 bat '''
-                    python test.py
+                    python redirect-check-2.py
 
                     if exist redirect_results*.xlsx (
                         move redirect_results*.xlsx %OUTPUT_DIR%
@@ -43,7 +43,7 @@ stage('Python Check') {
 
     post {
         success {
-            echo "✅ Job completed"
+            echo "Job completed"
         }
         failure {
             echo "❌ Job failed"
