@@ -1,3 +1,4 @@
+Title
 tycoident.com
 precisionint.com
 precisioninterconnect.com
@@ -137,8 +138,6 @@ amp.com
 amp.fi
 ampincorporated.com
 applicationequipment.com
-Auto Dictionary
-Auto dictionary (also optimized for mobile)
 catalog.tycoelectronics.com
 designsmarterfaster.com
 designsmarterfaster.te.com
@@ -241,7 +240,7 @@ te.com/evora
 tycoelectronics.pt
 teconnectivity.cn
 minilan.de
-minilan.com
+minilan.com 
 premisnet.de
 te.com/3D-Building
 hmzd.tycoelectronics.com
@@ -254,17 +253,13 @@ stackedsfp.tycoelectronics.com
 raychem.com/products/
 everyconnectioncounts.com/cn
 tefiberoptics.com/cn
-energy site, US (te.com/us/en/industries/energy/home.aspx)
+te.com/us/en/industries/energy/home.aspx
 wavecrimp.tycoelectronics.com
 everyconnectioncounts (China) - te.com.cn/everyconnectioncounts/zh/home.html
-battery (te.com/battery)
-TELC - TE Learning Connection
-Tooling Cross-Reference
-Connector Picture Search -  te.com/picturesearch/
-MULTI-BEAM XLE Power Connector Configurator
-nordic.tycoelectronics.com
-tycoelectronics.nl (www.tycoelectronics.nl)
-Antennas Custom Design Request
+te.com/battery
+te.com/picturesearch
+nordic.tycoelectronics.com 
+tycoelectronics.nl
 adbluesensors.co.uk
 adbluesensors.com
 amecon-currentsensors.net
@@ -409,12 +404,9 @@ sensotherm.de
 pt1000.eu
 fgp-instrumentation.com
 seaconworldwide
-Italy Terms and Conditions  - te.com/aboutus/Condizionigenerali.asp
-India Country Site
-Custom BLS Design Request
+te.com/aboutus/Condizionigenerali.asp
 caps-necks.com
 meas-spec.cn
-wearables contact us form
 phoenixoptix.com
 TEConnectivityRacing.com
 expresscard.te.com
@@ -430,8 +422,7 @@ precisionsensors.meas-spec.com
 macrosensors.com
 astsensors.com
 Quality Certs
-Italy Terms and Conditions - te.com/aboutus/condizionigeneralidivendita-COLLEGNGO.asp
-Precision Subsea (SEACON)
+te.com/aboutus/condizionigeneralidivendita-COLLEGNGO.asp
 teconnectivity.swiss
 activeinterconnects.te.com
 antennas.te.com
@@ -515,6 +506,7 @@ smi-sensors.com
 si-micro.com
 kissling.de
 kissling.us
+cromptonusa.com
 laddinc.com
 microqsfp.com
 creganna.com
