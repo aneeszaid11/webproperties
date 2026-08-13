@@ -22,82 +22,46 @@ for original_url in urls:
     try:
         url = original_url.strip()
 
-        if not url:
-            continue
-
         if not url.startswith(("http://", "https://")):
-            url = "https://" + url
+            url = "http://" + url
 
-        # Build HTTPS then HTTP fallback list
-        urls_to_try = [url]
+        # PowerShell script using Invoke-WebRequest
+        ps_script = f"""
+        try {{
+            $resp = Invoke-WebRequest -Uri '{url}' -UseBasicParsing -MaximumRedirection 20
 
-        if url.startswith("https://"):
-            urls_to_try.append(url.replace("https://", "http://"))
-
-        success = False
-        last_error = ""
-
-        for test_url in urls_to_try:
-
-            print(f"Testing: {test_url}")
-
-            ps_script = f"""
-            try {{
-                $resp = Invoke-WebRequest -Uri '{test_url}' -UseBasicParsing -MaximumRedirection 20
-
+            [PSCustomObject]@{{
+                FinalUrl = $resp.BaseResponse.ResponseUri.AbsoluteUri
+                StatusCode = $resp.StatusCode
+            }} | ConvertTo-Json -Compress
+        }}
+        catch {{
+            if ($_.Exception.Response) {{
                 [PSCustomObject]@{{
-                    FinalUrl = $resp.BaseResponse.ResponseUri.AbsoluteUri
-                    StatusCode = $resp.StatusCode
+                    FinalUrl = $_.Exception.Response.ResponseUri.AbsoluteUri
+                    StatusCode = [int]$_.Exception.Response.StatusCode
                 }} | ConvertTo-Json -Compress
             }}
-            catch {{
-                if ($_.Exception.Response) {{
-                    [PSCustomObject]@{{
-                        FinalUrl = $_.Exception.Response.ResponseUri.AbsoluteUri
-                        StatusCode = [int]$_.Exception.Response.StatusCode
-                    }} | ConvertTo-Json -Compress
-                }}
-                else {{
-                    Write-Error $_.Exception.Message
-                    exit 1
-                }}
+            else {{
+                throw
             }}
-            """
+        }}
+        """
 
-            result = subprocess.run(
-                ["powershell", "-Command", ps_script],
-                capture_output=True,
-                text=True,
-                timeout=30
-            )
+        result = subprocess.run(
+            ["powershell", "-Command", ps_script],
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
 
-            if result.returncode == 0:
-                try:
-                    data = json.loads(result.stdout)
+        if result.returncode != 0:
+            raise Exception(result.stderr)
 
-                    final_url = data.get("FinalUrl", test_url)
-                    final_code = data.get("StatusCode", "N/A")
+        data = json.loads(result.stdout)
 
-                    success = True
-
-                    print(
-                        f"SUCCESS: {original_url} -> "
-                        f"{final_url} [{final_code}]"
-                    )
-
-                    break
-
-                except Exception as json_error:
-                    last_error = f"JSON Parse Error: {json_error}"
-
-            else:
-                last_error = result.stderr.strip()
-
-                print(f"FAILED: {test_url}")
-                print(last_error)
-
-        if not success:
-            raise Exception(last_error)
+        final_url = data.get("FinalUrl", "")
+        final_code = data.get("StatusCode", "N/A")
 
         status = "PASS" if str(final_code) == "200" else "FAIL"
         status_color = "Green" if str(final_code) == "200" else "Red"
@@ -134,10 +98,7 @@ for original_url in urls:
             "Loop Detected": "UNKNOWN",
             "Result": "FAIL",
             "Status Color": "Red",
-            "Review Comment": (
-                f"Reviewed on {today_date}: "
-                f"Link check failed"
-            )
+            "Review Comment": f"Reviewed on {today_date}: Link check failed"
         })
 
         print(f"{original_url} -> ERROR: {e}")
