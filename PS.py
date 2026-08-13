@@ -28,7 +28,7 @@ for original_url in urls:
         # PowerShell script using Invoke-WebRequest
         ps_script = f"""
         try {{
-            $resp = Invoke-WebRequest -Uri '{url}' -UseBasicParsing -MaximumRedirection 20
+            $resp = Invoke-WebRequest '{url}' -UseBasicParsing
 
             [PSCustomObject]@{{
                 FinalUrl = $resp.BaseResponse.ResponseUri.AbsoluteUri
