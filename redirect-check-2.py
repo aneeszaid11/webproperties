@@ -2,7 +2,10 @@ import requests
 import pandas as pd
 import urllib3
 from datetime import datetime  #  NEW
- 
+proxies = {
+    "http": "http://restrictedproxy.connect.te.com:80",
+    "https": "http://restrictedproxy.connect.te.com:80"
+}
 # Disable SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
  
@@ -34,6 +37,7 @@ for original_url in urls:
             response = requests.get(
                 url,
                 headers=headers,
+                proxies=proxies,
                 allow_redirects=True,
                 timeout=10,
                 verify=False
@@ -43,6 +47,7 @@ for original_url in urls:
             response = requests.get(
                 url,
                 headers=headers,
+                proxies=proxies,
                 allow_redirects=True,
                 timeout=10,
                 verify=False
