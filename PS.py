@@ -23,12 +23,12 @@ for original_url in urls:
         url = original_url.strip()
 
         if not url.startswith(("http://", "https://")):
-            url = "https://" + url
+            url = "http://" + url
 
         # PowerShell script using Invoke-WebRequest
         ps_script = f"""
         try {{
-            $resp = Invoke-WebRequest -Uri '{url}' -UseBasicParsing
+            $resp = Invoke-WebRequest -Uri '{url}' -UseBasicParsing -MaximumRedirection 20
 
             [PSCustomObject]@{{
                 FinalUrl = $resp.BaseResponse.ResponseUri.AbsoluteUri
